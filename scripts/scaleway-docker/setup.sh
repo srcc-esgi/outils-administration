@@ -23,16 +23,15 @@ source $DIR/user-config.cfg
 # Install ansible dependencies
 apt-get install gcc g++ python-dev libffi-dev libssl-dev -y
 
-# Install ansible using pip
+# Install/upgrade pip and ansible
 wget https://bootstrap.pypa.io/get-pip.py -P /tmp
 python /tmp/get-pip.py
+pip install --upgrade pip
 pip install ansible
+pip install --upgrade ansible
 
 # Read ansible hosts and accept rsa keys
-while read -r line; do
-    [[ "$line" =~ ^#.*$ ]] && continue
-    ssh-keyscan ${line} >> ~/.ssh/known_hosts
-done < "$DIR/$ansible_hosts"
+ssh-keyscan -f "$DIR/ansible/hosts" >> ~/.ssh/known_hosts
 
 # Launch playbook
 ansible-playbook $DIR/ansible/deploy.yml -i $DIR/ansible/hosts

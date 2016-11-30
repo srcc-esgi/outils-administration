@@ -1,0 +1,19 @@
+---
+# This playbook deploy docker 1.12 on unbuntu 16.04
+# on scaleway servers.
+
+- name: apply common configuration to all nodes
+  hosts: all
+  remote_user: root
+
+
+  roles:
+    - common
+
+- name: install docker 1.12
+  hosts: all
+  remote_user: deploy
+
+
+  roles:
+    - docker

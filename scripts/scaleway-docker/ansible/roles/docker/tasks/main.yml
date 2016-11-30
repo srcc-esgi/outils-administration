@@ -1,0 +1,27 @@
+---
+# This playbook will install docker engine 1.12
+
+- name: Ensure apt works with https and CA certs are installed
+  apt: name={{ item }} state=present
+  with_items:
+   - apt-transport-https
+   - ca-certificates
+
+- name: Add the new GPG key
+  apt_key: keyserver=hkp://ha.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+
+- name : Add docker repository
+  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-xenial main' state=present
+
+- name: Update apt package index
+  apt:
+    update_cache: yes
+
+- name: Install docker package
+  apt: name=docker-engine state=present
+
+- name: Ensure docker is started and starts on boot
+  systemd:
+    name: docker
+    state: started
+    enabled: True

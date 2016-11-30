@@ -1,0 +1,7 @@
+# Ansible hosts configuration file
+# Each host must be declared one line
+# using his IP address or DNS
+
+# Example of valid host declaration :
+# 1.2.3.4
+# example.srcc.fr

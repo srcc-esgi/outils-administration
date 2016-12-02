@@ -1,15 +1,11 @@
 ---
 # This playbook contain common plays that will be run on all nodes
 
-- name: set official ubuntu repos
-  copy: src=sources.list dest=/etc/apt/sources.list owner=root mode=0664
-  tags: apt
+- name: remove invalid unattended upgrades
+  file:
+    path: /etc/apt/apt.conf.d/50unattended-upgrades.ucf-dist
+    state: absent
 
 - name: update and upgrade all packages
   apt:
-    update_cache: yes
     upgrade: dist
-  tags: apt
-
-- name: create deploy user for ansible
-  user: name=deploy comment="Ansible deploy user" group=sudo

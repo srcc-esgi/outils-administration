@@ -5,7 +5,7 @@
 - name: apply common configuration to all nodes
   hosts: all
   remote_user: root
-
+  become: yes
 
   roles:
     - common
@@ -13,7 +13,7 @@
 - name: install docker 1.12
   hosts: all
   remote_user: root
-
+  become: yes
 
   roles:
     - docker

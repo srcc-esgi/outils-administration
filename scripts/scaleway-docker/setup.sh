@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script will ensure ansible is installed on the system,
-# configure /etc/ansible/hosts if needed, ans launch the playbooks.
+# configure /etc/ansible/hosts if needed, and launch the playbooks.
 
 # Get current work directory
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -19,7 +19,7 @@ fi
 source $DIR/user-config.cfg
 
 # Install ansible dependencies
-apt-get install -qqy gcc g++ python-dev libffi-dev libssl-dev
+$package_manager install -qqy gcc g++ python-dev libffi-dev libssl-dev
 
 # Install/upgrade pip
 if command -v pip >/dev/null 2>&1; then
